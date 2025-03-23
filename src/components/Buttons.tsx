@@ -1,7 +1,13 @@
 import React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 
-const Buttons = ({ onPress1, onPress2, onPress3 }: { onPress1: () => void, onPress2: () => void, onPress3: () => void }) => {
+type ButtonsProps = {
+  onPress1: () => void;
+  onPress2: () => void;
+  onPress3: () => void;
+};
+
+const Buttons: React.FC<ButtonsProps> = ({ onPress1, onPress2, onPress3 }) => {
   return (
     <View style={styles.container}>
       <Button title="Correos" onPress={onPress1} />

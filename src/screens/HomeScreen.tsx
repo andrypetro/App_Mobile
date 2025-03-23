@@ -9,8 +9,7 @@ const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const webViewRef = useRef<WebViewRef>(null);
   
-  // Estado para manejar la URL actual
-  const [url, setUrl] = useState('https://auth.ankama.com/register/ankama/form?origin_tracker=https://ankabox.ankama.com/es/identificacion');
+  const [url, setUrl] = useState('https://auth.ankama.com/login/ankama/form?origin_tracker=https://ankabox.ankama.com/es/identificacion?from%3Dhttps%253A%252F%252Fankabox.ankama.com%252Fes&redirect_uri=https://auth.ankama.com/login-authorized?state%3DeyJzdGF0ZV9pZCI6IktpNmhqUFJPYmk1bGplUmVQWmxVNWUxbVNlQnQxa2d3R1R3NzlMWjBpeTgiLCJyZWRpcmVjdF91cmkiOiJodHRwczovL2FjY291bnQuYW5rYW1hLmNvbS9hdXRob3JpemVkIiwicHJvdmlkZXIiOiJBbmthbWEifQ');
 
   const injectScript = () => {
     if (webViewRef.current) {
@@ -19,9 +18,8 @@ const HomeScreen = () => {
   };
 
   const reloadWebView = () => {
-    // En lugar de recargar, reasignamos la URL para que se reinicie completamente
-    setUrl(''); // Vacía la URL temporalmente
-    setTimeout(() => setUrl('https://auth.ankama.com/login/ankama/form?origin_tracker=https://ankabox.ankama.com/es/identificacion?from%3Dhttps%253A%252F%252Fankabox.ankama.com%252Fes%26authlogin%3D8663E36437937395C2B945968064&redirect_uri=https://auth.ankama.com/login-authorized?state%3DeyJzdGF0ZV9pZCI6IjZCWngtNDNxTTZ0dHNqVXlXZkEzZlVid0w1el9vcXdoZDdGOW81OFFySXciLCJyZWRpcmVjdF91cmkiOiJodHRwczovL2FjY291bnQuYW5rYW1hLmNvbS9hdXRob3JpemVkIiwicHJvdmlkZXIiOiJBbmthbWEifQ'), 100);
+    setUrl('');
+    setTimeout(() => setUrl('https://auth.ankama.com/login/ankama/form?origin_tracker=https://ankabox.ankama.com/es/identificacion?from%3Dhttps%253A%252F%252Fankabox.ankama.com%252Fes&redirect_uri=https://auth.ankama.com/login-authorized?state%3DeyJzdGF0ZV9pZCI6IktpNmhqUFJPYmk1bGplUmVQWmxVNWUxbVNlQnQxa2d3R1R3NzlMWjBpeTgiLCJyZWRpcmVjdF91cmkiOiJodHRwczovL2FjY291bnQuYW5rYW1hLmNvbS9hdXRob3JpemVkIiwicHJvdmlkZXIiOiJBbmthbWEifQ'), 100);
   };
 
   return (
