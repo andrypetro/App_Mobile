@@ -1,11 +1,7 @@
-export const injectRegistrationScript = `
+export const injectRegistrationScript = (emails: string[]) => `
   (function() {
     try {
-      const correos = [
-        "m.a.r.ymendeliek@gmail.com",
-        "f.l.o.rrumble@gmail.com",
-        "a.n.i.eglastik@gmail.com"
-      ];
+      const correos = ${JSON.stringify(emails)}; // Se usa la lista pasada desde React Native
       let indiceCorreo = localStorage.getItem("indiceCorreo") ? parseInt(localStorage.getItem("indiceCorreo")) : 0;
 
       function seleccionarApellidoAleatorio() {
@@ -38,7 +34,7 @@ export const injectRegistrationScript = `
           if (loginInput && passwordInput && lastnameInput && firstnameInput && birthdayDayInput && birthdayMonthInput && birthdayYearInput) {
             clearInterval(intervalId);
 
-            loginInput.value = correos[indiceCorreo];
+            loginInput.value = correos[indiceCorreo] || "correo@ejemplo.com"; // Usa el correo actual
             passwordInput.value = "santiago22";
             lastnameInput.value = seleccionarApellidoAleatorio();
             firstnameInput.value = seleccionarNombreAleatorio();
@@ -62,7 +58,7 @@ export const injectRegistrationScript = `
             elementToClick.click();
             console.log('Botón clicado');
           } else {
-            console.error("No se pudo encontrar el elemento para hacer clic.");
+            console.error("No se pudo encontrar el botón de registro.");
           }
         }, 1000);
       }
