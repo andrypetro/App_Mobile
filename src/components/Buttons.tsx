@@ -10,9 +10,9 @@ type ButtonsProps = {
 const Buttons: React.FC<ButtonsProps> = ({ onPress1, onPress2, onPress3 }) => {
   return (
     <View style={styles.container}>
-      <Button title="Correos" onPress={onPress1} />
-      <Button title="Opción 1" onPress={onPress2} />
-      <Button title="Opción 2" onPress={onPress3} />
+      <Button title="Correos" onPress={onPress1} color="#FF5733" /> {/* Rojo */}
+      <Button title="Opción 1" onPress={onPress2} color="#3498DB" /> {/* Azul */}
+      <Button title="Opción 2" onPress={onPress3} color="#3498DB" /> {/* Verde */}
     </View>
   );
 };

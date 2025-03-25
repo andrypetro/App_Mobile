@@ -1,8 +1,17 @@
-export const injectRegistrationScript = (emails: string[]) => `
+export const injectRegistrationScript = (emails: string[]) => `  
   (function() {
     try {
-      const correos = ${JSON.stringify(emails)}; // Se usa la lista pasada desde React Native
-      let indiceCorreo = localStorage.getItem("indiceCorreo") ? parseInt(localStorage.getItem("indiceCorreo")) : 0;
+      const correos = ${JSON.stringify(emails)};  
+      if (!correos || correos.length === 0) {
+        console.warn("⚠️ No hay correos disponibles. Deteniendo script.");
+        return;
+      }
+
+      // 🔥 Leer y validar índice en LocalStorage
+      let indiceCorreo = parseInt(localStorage.getItem("indiceCorreo")) || 0;
+      if (isNaN(indiceCorreo) || indiceCorreo >= correos.length) {
+        indiceCorreo = 0; // Reinicia si está fuera de rango
+      }
 
       function seleccionarApellidoAleatorio() {
         const apellidos = ["Agamez", "Gómez"];
@@ -34,7 +43,11 @@ export const injectRegistrationScript = (emails: string[]) => `
           if (loginInput && passwordInput && lastnameInput && firstnameInput && birthdayDayInput && birthdayMonthInput && birthdayYearInput) {
             clearInterval(intervalId);
 
-            loginInput.value = correos[indiceCorreo] || "correo@ejemplo.com"; // Usa el correo actual
+            // 🔥 Verifica cuál correo se está usando
+            console.log('📩 Usando correo:', correos[indiceCorreo]);
+
+            // ✅ Asignar valores al formulario
+            loginInput.value = correos[indiceCorreo] || "";
             passwordInput.value = "santiago22";
             lastnameInput.value = seleccionarApellidoAleatorio();
             firstnameInput.value = seleccionarNombreAleatorio();
@@ -44,9 +57,9 @@ export const injectRegistrationScript = (emails: string[]) => `
             birthdayMonthInput.value = fechaCumpleaños.mes.toString().padStart(2, "0");
             birthdayYearInput.value = fechaCumpleaños.año.toString();
 
-            console.log('Formulario rellenado con éxito');
+            console.log('📋 Formulario rellenado con:', correos[indiceCorreo]);
           } else {
-            console.log('Esperando a que los campos de formulario estén disponibles...');
+            console.log('⌛ Esperando a que los campos de formulario estén disponibles...');
           }
         }, 500);
       }
@@ -56,9 +69,9 @@ export const injectRegistrationScript = (emails: string[]) => `
           const elementToClick = document.querySelector("body > div.main-container > div.main-content.main-container-form-page > secure-form > form > button");
           if (elementToClick) {
             elementToClick.click();
-            console.log('Botón clicado');
+            console.log('✅ Botón de registro clicado');
           } else {
-            console.error("No se pudo encontrar el botón de registro.");
+            console.error("❌ No se pudo encontrar el botón de registro.");
           }
         }, 1000);
       }
@@ -66,10 +79,13 @@ export const injectRegistrationScript = (emails: string[]) => `
       fillForm();
       clickElement();
 
+      // 🔥 Asegurar que el índice avanza correctamente
       indiceCorreo = (indiceCorreo + 1) % correos.length;
       localStorage.setItem("indiceCorreo", indiceCorreo.toString());
+      console.log('🔄 Nuevo índice guardado:', indiceCorreo);
+
     } catch (error) {
-      console.error("Error al ejecutar el script de inyección:", error);
+      console.error("❌ Error al ejecutar el script de inyección:", error);
     }
   })();
 `;
