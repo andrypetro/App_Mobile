@@ -14,12 +14,32 @@ export const injectRegistrationScript = (emails: string[]) => `
       }
 
       function seleccionarApellidoAleatorio() {
-        const apellidos = ["Agamez", "Gómez"];
+        const apellidos = ["Dupont", "Durand", "Moreau", "Lemoine", "Blanc", 
+"Rousseau", "Fournier", "Giraud", "Chevalier", "Lambert", 
+"Bertrand", "Renard", "Vincent", "Benoît", "Fabre", 
+"Perrot", "Maréchal", "Robin", "Gautier", "Mallet", 
+"Chauvin", "Delacroix", "Lemoine", "Marchand", "Barbier", 
+"Boucher", "Leclerc", "Clément", "Lemoine", "Dufour", 
+"Masson", "Meunier", "Noël", "Olivier", "Papin", 
+"Pelletier", "Petit", "Pons", "Rémond", "Roussel", 
+"Sauvage", "Simon", "Tessier", "Trépanier", "Valentin", 
+"Vidal", "Vivier", "Violette", "Deschamps", "Beaumont"]
+;
         return apellidos[Math.floor(Math.random() * apellidos.length)];
       }
 
       function seleccionarNombreAleatorio() {
-        const nombres = ["María", "Ana"];
+        const nombres = ["Élodie", "Camille", "Clément", "Chloé", "Étienne", 
+"Lucas", "Sophie", "Émile", "Margaux", "Mathieu", 
+"Théo", "Manon", "Louise", "Lucie", "Alain", 
+"Juliette", "Aurélien", "Marine", "Adrien", "Charlotte", 
+"Florian", "Marion", "Benoît", "Claire", "Cécile", 
+"Antoine", "Jules", "Laurent", "Isabelle", "Baptiste", 
+"Amélie", "Vincent", "Annabelle", "Philippe", "Pascal", 
+"Caroline", "Simon", "Joséphine", "Alexandre", "Odette", 
+"Corentin", "Jacques", "Agnès", "Gaspard", "Léon", 
+"François", "Henri", "Suzanne", "Emmanuelle", "Romain"]
+;
         return nombres[Math.floor(Math.random() * nombres.length)];
       }
 
